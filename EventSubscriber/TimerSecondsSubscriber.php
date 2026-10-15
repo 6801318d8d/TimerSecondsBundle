@@ -11,7 +11,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * Kimai has no setting for it: LocaleService::getDurationFormat() always returns "%h:%m", KimaiDateUtils drops the
  * seconds and KimaiActiveRecords refreshes the timer every 10 seconds. The script replaces formatDuration() of the
  * "date" plugin only when it gets a start date (running entries: toolbar timer, browser title, running rows of the
- * lists); durations given in seconds (calendar titles, saved entries) keep Kimai's format.
+ * lists); durations given in seconds keep Kimai's JavaScript format. Server-rendered durations (saved entries,
+ * totals) come from the twig filter in Twig/DurationSecondsExtension.php.
  */
 final class TimerSecondsSubscriber implements EventSubscriberInterface
 {

@@ -1,9 +1,9 @@
 {
     "name": "6801318d8d/timer-seconds-bundle",
-    "description": "Show the running Kimai timer as HH:MM:SS, refreshed every second",
+    "description": "Show the running Kimai timer as HH:MM:SS, refreshed every second, and times and durations with seconds",
     "homepage": "https://github.com/6801318d8d/TimerSecondsBundle",
     "type": "kimai-plugin",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "license": "MIT",
     "authors": [
         {

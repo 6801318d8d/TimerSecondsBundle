@@ -6,3 +6,12 @@ services:
 
     KimaiPlugin\TimerSecondsBundle\EventSubscriber\:
         resource: '../../EventSubscriber/'
+
+    KimaiPlugin\TimerSecondsBundle\Form\:
+        resource: '../../Form/'
+
+    # added to Twig after Kimai's LocaleFormatExtensions, so that its "duration" filter replaces Kimai's one
+    KimaiPlugin\TimerSecondsBundle\Twig\DurationSecondsExtension:
+        autoconfigure: false
+        tags:
+            - { name: twig.extension, priority: -100 }
