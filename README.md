@@ -11,6 +11,8 @@ A [Kimai](https://www.kimai.org) plugin that shows times and durations with seco
 - the seconds of a new entry that begins in the current minute, e.g. a timer started from the "Start" form, which
   Kimai sets to `:00`.
 
+![Running timer and timesheet list with seconds](screenshots/timesheet.webp)
+
 Kimai has no setting for any of this: the duration format is always `%h:%m` and the timer is refreshed every 10
 seconds (see [discussion #4972](https://github.com/kimai/kimai/discussions/4972)).
 
