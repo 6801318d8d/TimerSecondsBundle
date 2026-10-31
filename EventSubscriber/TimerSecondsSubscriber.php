@@ -13,6 +13,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  * "date" plugin only when it gets a start date (running entries: toolbar timer, browser title, running rows of the
  * lists); durations given in seconds keep Kimai's JavaScript format. Server-rendered durations (saved entries,
  * totals) come from the twig filter in Twig/DurationSecondsExtension.php.
+ *
+ * The script also marks the forms saved with the begin Kimai prefilled, so that a timer started from the "Start"
+ * form begins at the save (see Form/StartSecondsExtension.php).
  */
 final class TimerSecondsSubscriber implements EventSubscriberInterface
 {
@@ -65,6 +68,28 @@ final class TimerSecondsSubscriber implements EventSubscriberInterface
             tick();
             setInterval(tick, 1000);
         });
+
+        // a form saved with the begin Kimai prefilled (date and time as rendered): tell the server, which then starts
+        // the timer at the save (Form/StartSecondsExtension::UNTOUCHED); capture phase, before Kimai's modal reads it
+        window.addEventListener('submit', function (event) {
+            const form = event.target;
+            if (!(form instanceof HTMLFormElement)) {
+                return;
+            }
+            const date = form.querySelector('input[name$="[begin_date]"]');
+            const time = form.querySelector('input[name$="[begin_time]"]');
+            let marker = form.querySelector('input[name="timer_seconds_begin_untouched"]');
+            const untouched = date !== null && time !== null && date.value === date.defaultValue && time.value === time.defaultValue;
+            if (untouched && marker === null) {
+                marker = document.createElement('input');
+                marker.type = 'hidden';
+                marker.name = 'timer_seconds_begin_untouched';
+                marker.value = '1';
+                form.appendChild(marker);
+            } else if (!untouched && marker !== null) {
+                marker.remove();
+            }
+        }, true);
         </script>
         HTML;
 

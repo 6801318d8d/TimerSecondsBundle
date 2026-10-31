@@ -8,8 +8,9 @@ A [Kimai](https://www.kimai.org) plugin that shows times and durations with seco
   shows a time: lists, reports, HTML and PDF exports;
 - durations as `00:59:00` instead of `0:59` wherever Kimai renders them on the server: lists, totals, reports,
   dashboard widgets, HTML and PDF exports. Decimal durations are unchanged;
-- the seconds of a new entry that begins in the current minute, e.g. a timer started from the "Start" form, which
-  Kimai sets to `:00`.
+- a timer started from the "Start" form begins when you click Save, to the second, as long as you leave "From" as
+  prefilled. Kimai takes the minute when the form opened, with `:00` seconds, so the timer could start at
+  `00:01:05` (see [issue #6290](https://github.com/kimai/kimai/issues/6290)). A begin typed by hand stays as typed.
 
 ![Running timer and timesheet list with seconds](screenshots/timesheet.webp)
 
